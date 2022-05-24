@@ -1,0 +1,52 @@
+
+<div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <button type="button" class="btn btn-primary" a routerLink="/add-employee"> Add Employee </button>
+        <form class="form-inline">
+
+          <!-- option one  -->
+          <!-- #key="ngModel" means when we type in the serach box it will bined what we
+             entered with "key" and it will be sent to searchEmployee(key.value) method. -->
+          <input class="form-control mr-sm-2" type="search" (ngModelChange)="searchEmployee(key.value)"
+          #key="ngModel" ngModel name="key" placeholder="Search employee"  >
+
+          <!-- Option two -->
+          <!-- <input class="form-control mr-sm-2" type="search" (ngModelChange)="searchEmployee($event)"
+           ngModel name="key" placeholder="Search" > -->
+        </form>
+      </nav>
+</div>
+
+<table class="table table-hover" >
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee First Name </th>
+            <th>Employee Last Name </th>
+            <th>Employee Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employeeList ; let i=index ;">
+          <!-- <td>{{i+1}}</td>            -->
+          <td>{{employee.id}}</td>
+          <td>{{employee.firstName }}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.email}}</td>
+          <!-- "npm install angular-confirmation-popover" has been installed to enable popover for delete button  -->
+          <td><button type="button" class="btn btn-primary"  a [routerLink]="['/update-employee',employee.id]"> Update </button>  |
+              <button
+                class="btn btn-danger"
+                mwlConfirmationPopover
+                [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage"
+                placement="left"
+                (confirm)="delete(employee.id)"
+                (cancel)="cancelClicked = true">
+              Delete
+            </button>
+            </td>
+        </tr>
+    </tbody>
+  </table>

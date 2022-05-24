@@ -1,0 +1,55 @@
+
+
+<div class="d-flex justify-content-center">
+
+    <div class="card m-3">
+        <!-- <div class="card-header"> -->
+        <div class="modal-body">
+            Employee Form
+        </div>
+        <div class="card-body">
+            <p class="card-text">Please Register yourself and feel free to contact further:</p>
+            <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name = "firstName" 
+                    formControlName="firstName" [(ngModel)] = "employee.firstName" />
+                    <div *ngIf="submitted && fun.firstName.errors" >   
+                        <div *ngIf= "fun.firstName.errors.required" class="alert alert-danger">
+                            First Name is required 
+                        </div>                                            
+                    </div>            
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name = "lastName" formControlName = "lastName"
+                    [(ngModel)]="employee.lastName" />
+                    <div *ngIf="submitted && fun.lastName.errors"> 
+                        <div *ngIf= "fun.lastName.errors.required" class="alert alert-danger">
+                            Last Name is required 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email ID</label>
+                    <input type="text" class="form-control" name = "email" formControlName = "email"
+                    [(ngModel)]="employee.email" />
+                    <div *ngIf="submitted && fun.email.errors"> 
+                        <div *ngIf= "fun.email.errors.required" class="alert alert-danger">
+                           Email is required 
+                        </div>
+                        <div *ngIf="fun.email.errors.email" class="alert alert-danger">
+                            Enter Valid Email Address
+                        </div>
+                    </div>
+                </div>
+                                
+                <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid" >Submit</button>
+            </form>
+        </div>
+    </div>
+  
+  </div>
